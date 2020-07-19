@@ -1,0 +1,8 @@
+<resources>
+  <string name="app_name">WeWatch</string>
+  <string name="network_error">Network Error. Try Again?</string>
+  <string name="ok">Ok</string>
+  <string name="error">Error</string>
+  <string name="title_message">You must enter a title</string>
+  <string name="enter_title">You must enter a title</string>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.raywenderlich.wewatch.main.MainActivity">
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/movies_recyclerview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+  <LinearLayout
+    android:id="@+id/no_movies_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center"
+    android:layout_marginStart="@dimen/dp_quad"
+    android:layout_marginEnd="@dimen/dp_quad"
+    android:orientation="vertical">
+
+    <ImageView
+      android:layout_width="200dp"
+      android:layout_height="200dp"
+      android:layout_marginBottom="@dimen/dp_double"
+      android:src="@drawable/ic_movie_teal_24dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      android:text="There are currently no movies in your watch list. Tap the button below to get started!"
+      android:textAlignment="center" />
+
+  </LinearLayout>
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="@dimen/fab_margin"
+    android:onClick="goToAddMovieActivity"
+    android:tint="@android:color/white"
+    app:srcCompat="@android:drawable/ic_input_add" />
+
+</FrameLayout>

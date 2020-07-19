@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/addLayout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".view.activity.AddMovieActivity">
+
+  <include
+    android:id="@+id/toolbar_view"
+    layout="@layout/toolbar_view_custom_layout"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <EditText
+    android:id="@+id/titleEditText"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginEnd="50dp"
+    android:ems="10"
+    android:hint="Title"
+    android:inputType="textPersonName"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/toolbar_view" />
+
+  <EditText
+    android:id="@+id/yearEditText"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="50dp"
+    android:ems="10"
+    android:hint="1995"
+    android:inputType="date"
+    android:maxLength="20"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
+
+  <Button
+    android:id="@+id/addMovieButton"
+    style="@android:style/TextAppearance.Material.Small"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:backgroundTint="@color/colorAccent"
+    android:onClick="addMovieClick"
+    android:text="ADD MOVIE"
+    android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+    android:textColor="@color/backgroundLight"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/yearEditText" />
+
+  <ImageButton
+    android:id="@+id/searchButton"
+    style="@android:style/Widget.Material.Light.ButtonBar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginBottom="8dp"
+    android:onClick="goToSearchMovieActivity"
+    android:src="@drawable/ic_search_black_24dp"
+    app:layout_constraintBottom_toBottomOf="@+id/titleEditText"
+    app:layout_constraintStart_toEndOf="@+id/titleEditText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
