@@ -35,7 +35,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-  const val API_KEY = ""
   const val TMDB_BASE_URL = "http://api.themoviedb.org/3/"
   const val TMDB_IMAGEURL = "https://image.tmdb.org/t/p/w500/"
 

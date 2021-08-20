@@ -12,3 +12,4 @@
 gradlew.bat
 gradle/
 gradlew
+/app/src/main/java/com/raywenderlich/wewatch/Constants.kt

@@ -30,6 +30,7 @@
 
 package com.raywenderlich.wewatch.model
 
+import com.raywenderlich.wewatch.API_KEY
 import com.raywenderlich.wewatch.network.RetrofitClient
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -39,7 +40,7 @@ open class RemoteDataSource {
 
   fun searchResultsObservable(query: String): Observable<TmdbResponse> {
     return RetrofitClient.moviesApi
-        .searchMovie(RetrofitClient.API_KEY, query)
+        .searchMovie(API_KEY, query)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
   }
