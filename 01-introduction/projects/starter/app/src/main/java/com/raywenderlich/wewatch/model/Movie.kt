@@ -83,7 +83,7 @@ data class Movie(
   var releaseDate: String? = null,
   var watched: Boolean = false) {
 
-  fun getReleaseYearFromDate(): String? {
-    return releaseDate?.split("-")?.get(0)
+  fun getReleaseYearFromDate(): String {
+    return releaseDate?.split("-")?.get(0) ?: ""
   }
 }

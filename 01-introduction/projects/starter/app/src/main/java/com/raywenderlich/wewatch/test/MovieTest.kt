@@ -26,6 +26,6 @@ class MovieTest {
     @Test
     fun testGetReleaseYearFromDateEdgeCaseNull() {
         val movie = Movie(title = "FindingNemo")
-        assertEquals(null, movie.getReleaseYearFromDate())
+        assertEquals("", movie.getReleaseYearFromDate())
     }
 }
