@@ -44,9 +44,7 @@ class IntegerListTypeConverter {
       return mutableListOf<Int>()
     }
 
-    val listType = object : TypeToken<List<Int>>() {
-
-    }.type
+    val listType = object : TypeToken<List<Int>>() {}.type
 
     return gson.fromJson(data, listType)
   }
