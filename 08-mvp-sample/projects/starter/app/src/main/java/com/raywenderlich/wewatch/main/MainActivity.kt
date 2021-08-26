@@ -32,7 +32,6 @@ package com.raywenderlich.wewatch.main
 
 import android.app.Activity
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -50,12 +49,6 @@ import com.raywenderlich.wewatch.R
 import com.raywenderlich.wewatch.add.AddMovieActivity
 import com.raywenderlich.wewatch.model.LocalDataSource
 import com.raywenderlich.wewatch.model.Movie
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.annotations.NonNull
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
 
@@ -64,7 +57,6 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
   private lateinit var fab: FloatingActionButton
   private lateinit var noMoviesLayout: LinearLayout
 
-  private lateinit var dataSource: LocalDataSource
   private lateinit var mainPresenter: MainContract.PresenterInterface
 
   private val TAG = "MainActivity"
@@ -139,14 +131,7 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     if (item.itemId == R.id.deleteMenuItem) {
-      for (movie in adapter.selectedMovies) {
-        dataSource.delete(movie)
-      }
-      if (adapter.selectedMovies.size == 1) {
-        displayMessage("Movie deleted.")
-      } else if (adapter.selectedMovies.size > 1) {
-        displayMessage("Movies deleted.")
-      }
+      mainPresenter.onDeleteTapped(adapter.selectedMovies)
     }
 
     return super.onOptionsItemSelected(item)
@@ -163,6 +148,5 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
   companion object {
     const val ADD_MOVIE_ACTIVITY_REQUEST_CODE = 1
   }
-
 
 }
