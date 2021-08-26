@@ -56,7 +56,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
 
   private lateinit var moviesRecyclerView: RecyclerView
   private lateinit var adapter: MainAdapter
@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
   private lateinit var noMoviesLayout: LinearLayout
 
   private lateinit var dataSource: LocalDataSource
+  private lateinit var mainPresenter: MainContract.PresenterInterface
   private val compositeDisposable = CompositeDisposable()
 
   private val TAG = "MainActivity"
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-
+    setupPresenter()
     setupViews()
   }
 
@@ -95,6 +96,11 @@ class MainActivity : AppCompatActivity() {
     noMoviesLayout = findViewById(R.id.no_movies_layout)
     supportActionBar?.title = "Movies to Watch"
 
+  }
+
+  private fun setupPresenter() {
+    val dataSource = LocalDataSource(application)
+    mainPresenter = MainPresenter(this, dataSource)
   }
 
   private fun getMyMoviesList() {
