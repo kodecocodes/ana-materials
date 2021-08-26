@@ -51,19 +51,24 @@ open class AddMovieActivity : AppCompatActivity(), AddMovieContract.ViewInterfac
   private lateinit var titleEditText: EditText
   private lateinit var releaseDateEditText: EditText
   private lateinit var movieImageView: ImageView
-  private lateinit var dataSource: LocalDataSource
+  private lateinit var addMoviePresenter: AddMoviePresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_add_movie)
+    setupPresenter()
     setupViews()
-    dataSource = LocalDataSource(application)
   }
 
   fun setupViews() {
     titleEditText = findViewById(R.id.movie_title)
     releaseDateEditText = findViewById(R.id.movie_release_date)
     movieImageView = findViewById(R.id.movie_imageview)
+  }
+
+  private fun setupPresenter() {
+    val dataSource = LocalDataSource(application)
+    addMoviePresenter = AddMoviePresenter(this, dataSource)
   }
 
   //search onClick
@@ -76,20 +81,11 @@ open class AddMovieActivity : AppCompatActivity(), AddMovieContract.ViewInterfac
 
   //addMovie onClick
   fun onClickAddMovie(v: View) {
-
-    if (TextUtils.isEmpty(titleEditText.text)) {
-      displayMessage("Movie title cannot be empty.")
-    } else {
       val title = titleEditText.text.toString()
       val releaseDate = releaseDateEditText.text.toString()
       val posterPath = if (movieImageView.tag != null) movieImageView.tag.toString() else ""
 
-      val movie = Movie(title, releaseDate, posterPath)
-      dataSource.insert(movie)
-
-      setResult(Activity.RESULT_OK)
-      finish()
-    }
+      addMoviePresenter.addMovie(title, releaseDate, posterPath)
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -104,7 +100,8 @@ open class AddMovieActivity : AppCompatActivity(), AddMovieContract.ViewInterfac
   }
 
   override fun returnToMain() {
-    TODO("Not yet implemented")
+    setResult(Activity.RESULT_OK)
+    finish()
   }
 
   override fun displayMessage(message: String) {
