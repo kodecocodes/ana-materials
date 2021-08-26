@@ -32,6 +32,7 @@ package com.raywenderlich.wewatch.main
 
 import android.app.Activity
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -65,7 +66,6 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
 
   private lateinit var dataSource: LocalDataSource
   private lateinit var mainPresenter: MainContract.PresenterInterface
-  private val compositeDisposable = CompositeDisposable()
 
   private val TAG = "MainActivity"
 
@@ -78,13 +78,12 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
 
   override fun onStart() {
     super.onStart()
-    dataSource = LocalDataSource(application)
-    getMyMoviesList()
+   mainPresenter.getMyMoviesList()
   }
 
   override fun onStop() {
     super.onStop()
-    compositeDisposable.clear()
+    mainPresenter.stop()
   }
 
   private fun setupViews() {
@@ -103,48 +102,19 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
     mainPresenter = MainPresenter(this, dataSource)
   }
 
-  private fun getMyMoviesList() {
-    val myMoviesDisposable = myMoviesObservable
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(observer)
+  override fun displayMovies(movieList: List<Movie>) {
+    adapter.movieList = movieList
+    adapter.notifyDataSetChanged()
 
-    compositeDisposable.add(myMoviesDisposable)
+    moviesRecyclerView.visibility = VISIBLE
+    noMoviesLayout.visibility = INVISIBLE
   }
 
-  private val myMoviesObservable: Observable<List<Movie>>
-    get() = dataSource.allMovies
+  override fun displayNoMovies() {
+    Log.d(TAG, "No movies to display.")
 
-
-  private val observer: DisposableObserver<List<Movie>>
-    get() = object : DisposableObserver<List<Movie>>() {
-
-      override fun onNext(movieList: List<Movie>) {
-        displayMovies(movieList)
-      }
-
-      override fun onError(@NonNull e: Throwable) {
-        Log.e(TAG, "Error fetching movie list", e)
-        displayError("Error fetching movie list")
-      }
-
-      override fun onComplete() {
-        Log.d(TAG, "Completed")
-      }
-    }
-
-  fun displayMovies(movieList: List<Movie>?) {
-    if (movieList == null || movieList.size == 0) {
-      Log.d(TAG, "No movies to display.")
-      moviesRecyclerView.visibility = INVISIBLE
-      noMoviesLayout.visibility = VISIBLE
-    } else {
-      adapter.movieList = movieList
-      adapter.notifyDataSetChanged()
-
-      moviesRecyclerView.visibility = VISIBLE
-      noMoviesLayout.visibility = INVISIBLE
-    }
+    moviesRecyclerView.visibility = INVISIBLE
+    noMoviesLayout.visibility = VISIBLE
   }
 
   //fab onClick
@@ -182,11 +152,11 @@ class MainActivity : AppCompatActivity(), MainContract.ViewInterface {
     return super.onOptionsItemSelected(item)
   }
 
-  fun displayMessage(message: String) {
+  override fun displayMessage(message: String) {
     Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
   }
 
-  fun displayError(message: String) {
+  override fun displayError(message: String) {
     displayMessage(message)
   }
 
