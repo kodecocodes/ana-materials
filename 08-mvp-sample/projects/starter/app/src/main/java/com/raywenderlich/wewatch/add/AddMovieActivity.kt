@@ -47,7 +47,7 @@ import com.raywenderlich.wewatch.model.LocalDataSource
 import com.raywenderlich.wewatch.network.RetrofitClient.TMDB_IMAGEURL
 import com.squareup.picasso.Picasso
 
-open class AddMovieActivity : AppCompatActivity(), AddMovieContract.ViewInterface {
+class AddMovieActivity : AppCompatActivity(), AddMovieContract.ViewInterface {
   private lateinit var titleEditText: EditText
   private lateinit var releaseDateEditText: EditText
   private lateinit var movieImageView: ImageView
