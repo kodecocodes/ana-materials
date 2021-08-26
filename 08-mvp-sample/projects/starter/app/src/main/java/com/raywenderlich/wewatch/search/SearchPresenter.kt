@@ -28,7 +28,13 @@ class SearchPresenter(
 
             override fun onNext(@NonNull tmdbResponse: TmdbResponse) {
                 Log.d(TAG, "OnNext ${tmdbResponse.totalResults}")
-                viewInterface.displayResult(tmdbResponse)
+
+                if (tmdbResponse.results == null || tmdbResponse.results?.size == 0) {
+                    viewInterface.displayNoMovieFound()
+                    return
+                } else {
+                    viewInterface.displayResult(tmdbResponse.results!!)
+                }
             }
 
             override fun onError(@NonNull e: Throwable) {

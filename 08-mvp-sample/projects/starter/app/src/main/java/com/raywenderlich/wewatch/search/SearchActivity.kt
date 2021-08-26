@@ -44,6 +44,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.raywenderlich.wewatch.R
+import com.raywenderlich.wewatch.model.Movie
 import com.raywenderlich.wewatch.model.RemoteDataSource
 import com.raywenderlich.wewatch.model.TmdbResponse
 import io.reactivex.Observable
@@ -99,19 +100,13 @@ class SearchActivity : AppCompatActivity(), SearchContract.ViewInterface {
     searchPresenter = SearchPresenter(this, remoteDataSource)
   }
 
-  override fun displayResult(tmdbResponse: TmdbResponse) {
+  override fun displayResult(movies: List<Movie>) {
     progressBar.visibility = INVISIBLE
-
-    if (tmdbResponse.totalResults == null || tmdbResponse.totalResults == 0) {
-      searchResultsRecyclerView.visibility = INVISIBLE
-      noMoviesTextView.visibility = VISIBLE
-    } else {
-      adapter.movieList = tmdbResponse.results ?: arrayListOf()
+      adapter.movieList = movies
       adapter.notifyDataSetChanged()
 
       searchResultsRecyclerView.visibility = VISIBLE
       noMoviesTextView.visibility = INVISIBLE
-    }
   }
 
   override fun displayMessage(message: String) {
@@ -120,6 +115,12 @@ class SearchActivity : AppCompatActivity(), SearchContract.ViewInterface {
 
   override fun displayError(message: String) {
     displayMessage(message)
+  }
+
+  override fun displayNoMovieFound() {
+    progressBar.visibility = INVISIBLE
+    searchResultsRecyclerView.visibility = INVISIBLE
+    noMoviesTextView.visibility = VISIBLE
   }
 
   companion object {
