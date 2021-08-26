@@ -7,7 +7,7 @@
   android:gravity="center_horizontal"
   android:orientation="vertical"
   android:padding="16dp"
-  tools:context="com.raywenderlich.wewatch.AddMovieActivity">
+  tools:context="com.raywenderlich.wewatch.add.AddMovieActivity">
 
   <ScrollView
     android:layout_width="match_parent"

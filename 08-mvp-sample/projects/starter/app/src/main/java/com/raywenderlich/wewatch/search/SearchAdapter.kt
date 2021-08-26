@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 
-package com.raywenderlich.wewatch
+package com.raywenderlich.wewatch.search
 
 import android.content.Context
 import android.view.LayoutInflater

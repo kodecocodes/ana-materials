@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 
-package com.raywenderlich.wewatch
+package com.raywenderlich.wewatch.add
 
 import android.app.Activity
 import android.content.Intent
@@ -40,6 +40,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.raywenderlich.wewatch.R
+import com.raywenderlich.wewatch.search.SearchActivity
 
 import com.raywenderlich.wewatch.model.Movie
 import com.raywenderlich.wewatch.model.LocalDataSource

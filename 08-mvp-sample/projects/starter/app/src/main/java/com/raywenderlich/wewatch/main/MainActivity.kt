@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 
-package com.raywenderlich.wewatch
+package com.raywenderlich.wewatch.main
 
 import android.app.Activity
 import android.content.Intent
@@ -46,6 +46,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.raywenderlich.wewatch.R
+import com.raywenderlich.wewatch.add.AddMovieActivity
 import com.raywenderlich.wewatch.model.LocalDataSource
 import com.raywenderlich.wewatch.model.Movie
 import io.reactivex.Observable

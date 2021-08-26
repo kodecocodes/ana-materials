@@ -13,7 +13,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.raywenderlich.wewatch.MainActivity"
+        <activity android:name="com.raywenderlich.wewatch.main.MainActivity"
                   android:label="@string/app_name"
                   android:theme="@style/AppTheme">
             <intent-filter>
@@ -23,11 +23,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.raywenderlich.wewatch.AddMovieActivity"
+        <activity android:name="com.raywenderlich.wewatch.add.AddMovieActivity"
                   android:label="Add Movie">
         </activity>
 
-        <activity android:name="com.raywenderlich.wewatch.SearchActivity"
+        <activity android:name="com.raywenderlich.wewatch.search.SearchActivity"
                   android:label="Search Results">
         </activity>
 
