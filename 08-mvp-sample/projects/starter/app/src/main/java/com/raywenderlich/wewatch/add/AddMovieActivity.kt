@@ -47,7 +47,7 @@ import com.raywenderlich.wewatch.model.LocalDataSource
 import com.raywenderlich.wewatch.network.RetrofitClient.TMDB_IMAGEURL
 import com.squareup.picasso.Picasso
 
-open class AddMovieActivity : AppCompatActivity() {
+open class AddMovieActivity : AppCompatActivity(), AddMovieContract.ViewInterface {
   private lateinit var titleEditText: EditText
   private lateinit var releaseDateEditText: EditText
   private lateinit var movieImageView: ImageView
@@ -103,8 +103,16 @@ open class AddMovieActivity : AppCompatActivity() {
     }
   }
 
-  fun displayMessage(message: String) {
+  override fun returnToMain() {
+    TODO("Not yet implemented")
+  }
+
+  override fun displayMessage(message: String) {
     Toast.makeText(this@AddMovieActivity, message, Toast.LENGTH_LONG).show()
+  }
+
+  override fun displayError(message: String) {
+    displayMessage(message)
   }
 
   companion object {
